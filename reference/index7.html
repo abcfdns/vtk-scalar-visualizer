@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VTK Scalar Visualizer with D3.js</title>
+    <link rel="stylesheet" href="style7.css">
+</head>
+<body>
+    <h1>VTK Scalar Visualizer</h1>
+
+    <div class="controls">
+        <div>
+            <label for="vtk-file">VTKファイルを選択:</label>
+            <input type="file" id="vtk-file" accept=".vtk">
+        </div>
+        
+        <div id="main-controls-container" style="display: none;">
+            <div>
+                <label for="scalar-select">表示するスカラデータ:</label>
+                <select id="scalar-select"></select>
+            </div>
+            <div>
+                <label for="colormap-select">カラーマップ:</label>
+                <select id="colormap-select">
+                    <option value="Viridis" selected>Viridis</option>
+                    <option value="Plasma">Plasma</option>
+                    <option value="Inferno">Inferno</option>
+                    <option value="Magma">Magma</option>
+                    <option value="Cividis">Cividis</option>
+                    <option value="Turbo">Turbo</option>
+                    <option value="Rainbow">Rainbow</option>
+                    <option value="Cool">Cool</option>
+                    <option value="Warm">Warm</option>
+                    <option value="Blues">Blues (単色)</option>
+                    <option value="Greens">Greens (単色)</option>
+                    <option value="Reds">Reds (単色)</option>
+                    <option value="Greys">Greys (単色)</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    
+    <div class="controls" id="range-controls-container" style="display: none;">
+        <input type="checkbox" id="auto-range" checked>
+        <label for="auto-range">自動範囲設定</label>
+        <label for="min-value">Min:</label>
+        <input type="number" id="min-value" step="any" disabled>
+        <label for="max-value">Max:</label>
+        <input type="number" id="max-value" step="any" disabled>
+        <button id="apply-range" disabled>適用</button>
+    </div>
+    
+    <div class="visualization-container">
+        <div id="vtk-canvas"></div>
+        <div id="legend"></div>
+    </div>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="main7.js"></script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+body {
+    font-family: var(--vscode-font-family);
+    font-size: var(--vscode-font-size);
+    color: var(--vscode-foreground);
+    background-color: var(--vscode-editor-background);
+    padding: 16px;
+    margin: 0;
+}
+
+.controls {
+    margin-bottom: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 16px;
+    padding: 12px;
+    background-color: var(--vscode-panel-background);
+    border: 1px solid var(--vscode-panel-border);
+    border-radius: 4px;
+}
+
+.main-controls-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 16px;
+}
+
+.range-controls-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;  
+    gap: 8px 16px;
+}
+
+label {
+    color: var(--vscode-foreground);
+    font-weight: 500;
+}
+
+select, input[type="number"] {
+    background-color: var(--vscode-input-background);
+    color: var(--vscode-input-foreground);
+    border: 1px solid var(--vscode-input-border);
+    border-radius: 2px;
+    padding: 4px 8px;
+    font-family: var(--vscode-font-family);
+    font-size: var(--vscode-font-size);
+}
+
+select:focus, input[type="number"]:focus {
+    outline: 1px solid var(--vscode-focusBorder);
+    outline-offset: -1px;
+}
+
+button {
+    background-color: var(--vscode-button-background);
+    color: var(--vscode-button-foreground);
+    border: none;
+    border-radius: 2px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-family: var(--vscode-font-family);
+    font-size: var(--vscode-font-size);
+}
+
+button:hover {
+    background-color: var(--vscode-button-hoverBackground);
+}
+
+button:disabled {
+    background-color: var(--vscode-button-secondaryBackground);
+    color: var(--vscode-button-secondaryForeground);
+    cursor: not-allowed;
+}
+
+input[type="checkbox"] {
+    margin-right: 6px;
+}
+
+.visualization-container {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    margin-top: 16px;
+    padding: 16px;
+    background-color: var(--vscode-panel-background);
+    border: 1px solid var(--vscode-panel-border);
+    border-radius: 4px;
+}
+
+#vtk-canvas {
+    border: 1px solid var(--vscode-panel-border);
+    background-color: var(--vscode-editor-background);
+    border-radius: 4px;
+}
+
+#legend svg {
+    border: 1px solid var(--vscode-panel-border);
+    background-color: var(--vscode-editor-background);
+    border-radius: 4px;
+}
+
+.axis {
+    font-family: var(--vscode-font-family);
+    font-size: 12px;
+}
+
+.axis text {
+    fill: var(--vscode-foreground);
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: var(--vscode-foreground);
+    stroke-width: 1;
+}
+
+.navigation-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin: 16px 0;
+    padding: 12px;
+    background-color: var(--vscode-panel-background);
+    border: 1px solid var(--vscode-panel-border);
+    border-radius: 4px;
+}
+
+.nav-button {
+    background-color: var(--vscode-button-secondaryBackground);
+    color: var(--vscode-button-secondaryForeground);
+    border: 1px solid var(--vscode-button-border);
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.nav-button:hover:not(:disabled) {
+    background-color: var(--vscode-button-secondaryHoverBackground);
+}
+
+.nav-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.current-file {
+    font-weight: 600;
+    color: var(--vscode-foreground);
+    font-size: 14px;
+    padding: 0 16px;
+    min-width: 200px;
+    text-align: center;
+}

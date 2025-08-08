@@ -1,0 +1,44 @@
+body {
+    font-family: sans-serif;
+    padding: 1em;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+h1 {
+    color: #333;
+    margin-top: 0;
+}
+
+.controls {
+    margin-bottom: 1em;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 15px;
+}
+
+#main-controls-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 15px;
+}
+
+.visualization-container {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    margin-top: 1em;
+}
+
+#vtk-canvas {
+    border: 1px solid #ccc;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#legend svg {
+    border: 1px solid #ccc;
+    background-color: #fff;
+}

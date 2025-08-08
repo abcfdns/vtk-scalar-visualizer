@@ -1,0 +1,72 @@
+{
+  "name": "vtk-scalar-visualizer",
+  "displayName": "VTK Scalar Visualizer",
+  "description": "Visualize VTK scalar data files with interactive color maps and legends",
+  "version": "1.0.0",
+  "publisher": "your-publisher",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Visualization"
+  ],
+  "keywords": [
+    "vtk",
+    "visualization",
+    "scalar",
+    "scientific",
+    "data"
+  ],
+  "activationEvents": [
+    "onCustomEditor:vtkVisualizer.editor"
+  ],
+  "main": "./src/extension.js",
+  "contributes": {
+    "customEditors": [
+      {
+        "viewType": "vtkVisualizer.editor",
+        "displayName": "VTK Visualizer",
+        "selector": [
+          {
+            "filenamePattern": "*.vtk"
+          }
+        ],
+        "priority": "default"
+      }
+    ],
+    "commands": [
+      {
+        "command": "vtkVisualizer.openWith",
+        "title": "Open with VTK Visualizer",
+        "category": "VTK"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "vtkVisualizer.openWith",
+          "when": "resourceExtname == .vtk",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "test": "node ./test/runTest.js",
+    "test-parser": "mocha test/vtkParser.test.js",
+    "test-unit": "mocha test/*.test.js --grep -v Extension",
+    "test-provider": "mocha test/vtkVisualizerProvider.test.js",
+    "test-webview": "mocha test/webview.test.js",
+    "test-all": "npm run test-parser && npm run test-provider && npm run test-webview"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.60.0",
+    "@types/node": "^16.x",
+    "mocha": "^9.1.3",
+    "@vscode/test-electron": "^1.6.2",
+    "jsdom": "^22.1.0"
+  },
+  "dependencies": {
+    "d3": "^7.8.5"
+  }
+}

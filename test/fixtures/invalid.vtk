@@ -1,0 +1,7 @@
+# vtk DataFile Version 2.0
+Invalid VTK File - Missing Required Sections
+ASCII
+DATASET STRUCTURED_POINTS
+DIMENSIONS 5 5 1
+SPACING 1.0 1.0 1.0
+ORIGIN 0.0 0.0 0.0
