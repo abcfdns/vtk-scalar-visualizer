@@ -3,7 +3,10 @@
   "displayName": "VTK Scalar Visualizer",
   "description": "Visualize VTK scalar data files with interactive color maps and legends",
   "version": "1.0.0",
-  "publisher": "your-publisher",
+  "publisher": "abcfdns",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/abcfdns/vtk-visualizer.git"},
   "engines": {
     "vscode": "^1.60.0"
   },
