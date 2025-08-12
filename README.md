@@ -1,100 +1,101 @@
+
 # VTK Scalar Visualizer VS Code Extension
 
-VTK legacyファイル内のスカラーデータを可視化するVS Code拡張機能です。2D構造格子データを表示します。
+This is a VS Code extension for visualizing scalar data in VTK legacy files. It displays 2D structured grid data.
 
-## 機能
+## Features
 
-- **VTKファイルの自動認識**: `.vtk`ファイルを開くと自動的にビジュアライザーが起動
-- **複数スカラーフィールド対応**: ファイル内の全てのスカラーデータを切り替え表示
-- **豊富なカラーマップ**: 13種類のD3.jsカラースキーム（Viridis、Plasma、Inferno等）
-- **範囲調整機能**: 自動範囲設定または手動での最小値・最大値設定
-- **ファイル間ナビゲーション**: 同一ディレクトリ内のVTKファイルシーケンスを順次表示
-- **スパース番号対応**: 飛び飛びの番号（例：000500, 001000, 001500）のファイルシーケンスに対応
-- **設定保持機能**: ナビゲーション時にカラーレンジやスカラーフィールドの設定を保持
+- **Automatic VTK File Recognition**: The visualizer automatically launches when you open a `.vtk` file
+- **Multiple Scalar Field Support**: Switch between all scalar data fields in the file
+- **Rich Color Maps**: 13 D3.js color schemes (Viridis, Plasma, Inferno, etc.)
+- **Range Adjustment**: Set min/max range automatically or manually
+- **File Navigation**: Sequentially display VTK file sequences in the same directory
+- **Sparse Number Support**: Handles file sequences with non-consecutive numbers (e.g., 000500, 001000, 001500)
+- **Setting Retention**: Retains color range and scalar field settings during navigation
 
-## インストール方法
+## Installation
 
-### 前提条件
-- Node.js 16.x 以上
-- VS Code 1.60.0 以上
+### Prerequisites
+- Node.js 16.x or later
+- VS Code 1.60.0 or later
 
-### 開発環境でのインストール
+### Install for Development
 
-1. このリポジトリをクローンまたはダウンロード
-2. ターミナルで拡張機能のディレクトリに移動
-3. 依存関係をインストール:
+1. Clone or download this repository
+2. Move to the extension directory in your terminal
+3. Install dependencies:
    ```bash
    npm install
    ```
-4. VS Codeで拡張機能フォルダを開く
-5. `F5`キーを押して拡張機能をデバッグモードで実行
+4. Open the extension folder in VS Code
+5. Press `F5` to run the extension in debug mode
 
-### パッケージ化してインストール
+### Package and Install
 
-1. VS Code Extension Manager (vsce)をインストール:
+1. Install VS Code Extension Manager (vsce):
    ```bash
    npm install -g vsce
    ```
-2. 拡張機能をパッケージ化:
+2. Package the extension:
    ```bash
    vsce package
    ```
-3. 生成された`.vsix`ファイルをVS Codeにインストール:
-   - VS Codeのコマンドパレット（`Ctrl+Shift+P`）を開く
-   - 「Extensions: Install from VSIX...」を選択
-   - 生成された`.vsix`ファイルを選択
+3. Install the generated `.vsix` file in VS Code:
+   - Open the command palette (`Ctrl+Shift+P`)
+   - Select "Extensions: Install from VSIX..."
+   - Choose the generated `.vsix` file
 
-## 使い方
+## Usage
 
-### VTKファイルを開く
+### Opening a VTK File
 
-1. **方法1**: エクスプローラーで`.vtk`ファイルをクリック
-   - 自動的にVTK Visualizerで開きます
+1. **Method 1**: Click a `.vtk` file in the Explorer
+   - It will automatically open in the VTK Visualizer
 
-2. **方法2**: 右クリックメニューから開く
-   - `.vtk`ファイルを右クリック
-   - 「Open with VTK Visualizer」を選択
+2. **Method 2**: Open from the right-click menu
+   - Right-click a `.vtk` file
+   - Select "Open with VTK Visualizer"
 
-3. **方法3**: コマンドパレットから開く
-   - ファイルを通常のテキストエディタで開いた状態で
-   - コマンドパレット（`Ctrl+Shift+P`）を開く
-   - 「VTK: Open with VTK Visualizer」を実行
+3. **Method 3**: Open from the command palette
+   - Open the file in the regular text editor
+   - Open the command palette (`Ctrl+Shift+P`)
+   - Run "VTK: Open with VTK Visualizer"
 
-### ビジュアライザーの操作
+### Visualizer Controls
 
-1. **スカラーデータの選択**
-   - 上部のドロップダウンメニューから表示したいスカラーフィールドを選択
+1. **Select Scalar Data**
+   - Choose the scalar field to display from the dropdown menu at the top
 
-2. **カラーマップの変更**
-   - Color Mapドロップダウンから好みのカラースキームを選択
-   - 利用可能なカラーマップ:
+2. **Change Color Map**
+   - Select your preferred color scheme from the Color Map dropdown
+   - Available color maps:
      - Scientific: Viridis, Plasma, Inferno, Magma, Cividis, Turbo
      - Diverging: Rainbow, Cool, Warm
      - Sequential: Blues, Greens, Reds, Greys
 
-3. **値の範囲調整**
-   - **自動範囲**: 「Auto Range」チェックボックスをオン（デフォルト）
-   - **手動範囲**: 
-     1. 「Auto Range」チェックボックスをオフ
-     2. Min/Max値を入力
-     3. 「Apply」ボタンをクリック
+3. **Adjust Value Range**
+   - **Auto Range**: Turn on the "Auto Range" checkbox (default)
+   - **Manual Range**:
+     1. Turn off the "Auto Range" checkbox
+     2. Enter Min/Max values
+     3. Click the "Apply" button
 
-4. **ファイル間ナビゲーション**
-   - **Next/Previousボタン**: 同一ディレクトリ内のVTKファイルシーケンスを順次表示
-   - **対応パターン**: `filename_001.vtk` など
-   - **スパース番号**: 連続しない番号（000500, 001000, 001500...）にも対応
-   - **設定保持**: 同じスカラーフィールドでのナビゲーション時は手動範囲設定を保持
+4. **File Navigation**
+   - **Next/Previous buttons**: Sequentially display VTK file sequences in the same directory
+   - **Supported pattern**: e.g., `filename_001.vtk`
+   - **Sparse numbers**: Handles non-consecutive numbers (000500, 001000, 001500...)
+   - **Setting retention**: Manual range settings are retained when navigating within the same scalar field
 
-## サポートされるVTKファイル形式
+## Supported VTK File Formats
 
-現在、以下の形式のVTKファイルをサポートしています:
+Currently, the following VTK file formats are supported:
 
-- VTK Legacy ASCII形式
-- STRUCTURED_POINTSデータセット
-- POINT_DATAセクション
-- SCALARSデータ（float型）
+- VTK Legacy ASCII format
+- STRUCTURED_POINTS dataset
+- POINT_DATA section
+- SCALARS data (float type)
 
-### サンプルVTKファイル形式
+### Sample VTK File Format
 
 ```vtk
 # vtk DataFile Version 2.0
@@ -110,29 +111,29 @@ LOOKUP_TABLE default
 23.5 24.1 25.2 26.3 27.4 ...
 ```
 
-## トラブルシューティング
+## Troubleshooting
 
-### ファイルが開かない場合
-- VTKファイルがASCII形式であることを確認
-- STRUCTURED_POINTSとPOINT_DATAセクションが含まれていることを確認
+### If the file does not open
+- Make sure the VTK file is in ASCII format
+- Make sure it contains STRUCTURED_POINTS and POINT_DATA sections
 
-### 可視化が表示されない場合
-- ブラウザの開発者ツール（F12）でエラーメッセージを確認
-- VTKファイルの形式が正しいことを確認
+### If the visualization does not appear
+- Check for error messages in the browser developer tools (F12)
+- Make sure the VTK file format is correct
 
-### ナビゲーションボタンが動作しない場合
-- 同一ディレクトリに他のVTKファイルが存在することを確認
-- ファイル名が `basename_number.vtk` パターンに準拠していることを確認
-- 例：`data_001.vtk`, `karman_vortex_000500.vtk`
+### If navigation buttons do not work
+- Make sure there are other VTK files in the same directory
+- Make sure the file names follow the `basename_number.vtk` pattern
+- Examples: `data_001.vtk`, `karman_vortex_000500.vtk`
 
-### 設定が保持されない場合
-- 同じスカラーフィールド間でのナビゲーション時のみ設定が保持されます
-- スカラーフィールドが変わると自動的にAuto Rangeに戻ります
+### If settings are not retained
+- Settings are only retained when navigating within the same scalar field
+- If the scalar field changes, Auto Range is automatically restored
 
-### パフォーマンスが悪い場合
-- 大きなVTKファイル（数万点以上）では読み込みに時間がかかる場合があります
-- ブラウザのメモリ制限により、非常に大きなデータセットは表示できない場合があります
+### If performance is poor
+- Large VTK files (tens of thousands of points or more) may take time to load
+- Very large datasets may not be displayed due to browser memory limits
 
-## ライセンス
+## License
 
-[MITライセンス](LICENSE)
+[MIT License](LICENSE)
