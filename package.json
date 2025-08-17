@@ -6,7 +6,7 @@
   "publisher": "abcfdns",
   "repository": {
     "type": "git",
-    "url": "https://github.com/abcfdns/vtk-visualizer.git"},
+    "url": "https://github.com/abcfdns/vtk-scalar-visualizer"},
   "engines": {
     "vscode": "^1.60.0"
   },
