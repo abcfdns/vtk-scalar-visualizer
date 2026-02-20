@@ -150,23 +150,14 @@
         const scalars = vtkData.pointData.scalars[selectedScalarName];
         const [dimX, dimY] = vtkData.dimensions;
 
-        const canvasDiv = document.getElementById('vtk-canvas');
-        canvasDiv.innerHTML = '';
-
         const margin = { top: 20, right: 20, bottom: 20, left: 20 };
         const canvasWidth = 500;
         const cellWidth = canvasWidth / dimX;
         const canvasHeight = cellWidth * dimY;
-        const width = canvasWidth + margin.left + margin.right;
-        const height = canvasHeight + margin.top + margin.bottom;
-
-        const svg = d3.select(canvasDiv)
-            .append("svg")
-            .attr("width", width)
-            .attr("height", height)
-            .attr("shape-rendering", "crispEdges")
-            .append("g")
-            .attr("transform", `translate(${margin.left},${margin.top})`);
+        const canvasDiv = document.getElementById('vtk-canvas');
+        const canvas = document.getElementById('vtk-canvas-layer');
+        const ctx = canvas.getContext('2d');
+        canvasDiv.style.padding = `${margin.top}px ${margin.right}px ${margin.bottom}px ${margin.left}px`;
         
         let colorMin, colorMax;
         if (autoRangeCheckbox.checked) {
@@ -193,17 +184,49 @@
             .domain([colorMin, colorMax])
             .clamp(true);
 
+        canvas.width = dimX;
+        canvas.height = dimY;
+        canvas.style.width = `${canvasWidth}px`;
+        canvas.style.height = `${canvasHeight}px`;
+        ctx.imageSmoothingEnabled = false;
+
+        const imageData = ctx.createImageData(dimX, dimY);
+        const data = imageData.data;
+        const lutSize = 256;
+        const lut = new Uint8ClampedArray(lutSize * 4);
+        for (let i = 0; i < lutSize; i++) {
+            const t = i / (lutSize - 1);
+            const color = d3.color(interpolator(t));
+            const offset = i * 4;
+            lut[offset] = color.r;
+            lut[offset + 1] = color.g;
+            lut[offset + 2] = color.b;
+            lut[offset + 3] = 255;
+        }
+
+        const invRange = 1 / (colorMax - colorMin);
         for (let j = 0; j < dimY; j++) {
+            const row = dimY - 1 - j;
             for (let i = 0; i < dimX; i++) {
                 const index = j * dimX + i;
-                svg.append("rect")
-                    .attr("x", i * cellWidth)
-                    .attr("y", (dimY - 1 - j) * cellWidth)
-                    .attr("width", cellWidth)
-                    .attr("height", cellWidth)
-                    .attr("fill", colorScale(scalars[index]));
+                const value = scalars[index];
+                const pixelIndex = (row * dimX + i) * 4;
+                if (!Number.isFinite(value)) {
+                    data[pixelIndex + 3] = 0;
+                    continue;
+                }
+                let t = (value - colorMin) * invRange;
+                if (t < 0) t = 0;
+                if (t > 1) t = 1;
+                const lutIndex = Math.round(t * (lutSize - 1)) * 4;
+                data[pixelIndex] = lut[lutIndex];
+                data[pixelIndex + 1] = lut[lutIndex + 1];
+                data[pixelIndex + 2] = lut[lutIndex + 2];
+                data[pixelIndex + 3] = 255;
             }
         }
+
+        ctx.putImageData(imageData, 0, 0);
         
         drawLegend(colorScale, colorMin, colorMax, canvasHeight, margin);
     }
