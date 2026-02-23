@@ -311,7 +311,9 @@ class VtkVisualizerProvider {
             </div>
             
             <div class="visualization-container">
-                <div id="vtk-canvas"></div>
+                <div id="vtk-canvas">
+                    <canvas id="vtk-canvas-layer"></canvas>
+                </div>
                 <div id="legend"></div>
             </div>
 

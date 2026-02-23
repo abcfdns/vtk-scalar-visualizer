@@ -95,6 +95,11 @@ input[type="checkbox"] {
     border-radius: 4px;
 }
 
+#vtk-canvas-layer {
+    display: block;
+    image-rendering: pixelated;
+}
+
 #legend svg {
     border: 1px solid var(--vscode-panel-border);
     background-color: var(--vscode-editor-background);
